@@ -1,0 +1,13 @@
+[package]
+name = "terrain-generator"
+version = "0.0.0"
+description = "Random terrain generator based on cellular automata"
+authors = ["snowapril"]
+repository = "https://github.com/snowapril/terrain-rs"
+license = "MIT"
+edition = "2018"
+include = ["src/**/*.rs", "Cargo.toml"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]

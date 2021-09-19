@@ -1,0 +1,30 @@
+[package]
+name = "terrain-rs"
+version = "0.0.0"
+edition = "2018"
+description = "Random terrain visualizer"
+authors = ["snowapril"]
+repository = "https://github.com/snowapril/terrain-rs"
+license = "MIT"
+include = ["LICENSE", "Cargo.toml", "src/**/*.rs"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace]
+resolver = "2"
+members = [
+    ".", "generator"
+]
+
+[features]
+
+[dependencies]
+log = "0.4"
+terrain-generator = { path = "generator", version = "0.0.0"}
+
+[[bin]]
+name = "terrain-rs"
+path = "src/main.rs"
+
+[profile.dev.package."*"]
+opt-level = 3
