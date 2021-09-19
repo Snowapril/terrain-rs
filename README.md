@@ -9,7 +9,7 @@
 [![Test](https://github.com/snowapril/terrain-rs/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/snowapril/terrain-rs/actions)
 [![codecov](https://codecov.io/gh/Snowapril/terrain-rs/branch/main/graph/badge.svg?token=0AVA30J80A)](https://codecov.io/gh/Snowapril/terrain-rs)
 
-terrain-rs is composed of random terrain generator based on [`polygonal map generator`](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/) and visualizer
+terrain-rs is composed of random terrain generator based on [`polygonal map generator`](http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/) and visualizer using [`webgpu`](https://wgpu.rs/)
 
 ## How To Contribute
 

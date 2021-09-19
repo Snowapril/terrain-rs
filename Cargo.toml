@@ -19,7 +19,12 @@ members = [
 [features]
 
 [dependencies]
-log = "0.4"
+wgpu = "0.10.1"
+winit = "0.25"
+pollster = "0.2.4"
+async-executor = "1.4.1"
+bytemuck = "1.7.2"
+log = "0.4.14"
 terrain-generator = { path = "generator", version = "0.0.0"}
 
 [[bin]]
