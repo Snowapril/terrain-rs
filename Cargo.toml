@@ -1,7 +1,7 @@
 [package]
 name = "terrain-rs"
 version = "0.0.0"
-edition = "2018"
+edition = "2021"
 description = "Random terrain visualizer"
 authors = ["snowapril"]
 repository = "https://github.com/snowapril/terrain-rs"
