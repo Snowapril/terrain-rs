@@ -3,8 +3,18 @@ use winit::{
     event_loop::{ControlFlow, EventLoop},
     window::WindowBuilder,
 };
+fn init_logger() {
+    cfg_if::cfg_if! {
+        if #[cfg(target_arch = "wasm32")] {
+            console_log::init_with_level(log::Level::Info);
+        } else {
+            env_logger::init();
+        }
+    }
+}
 
 fn main() {
+    init_logger();
     let event_loop = EventLoop::new();
     let window = WindowBuilder::new().build(&event_loop).unwrap();
 
