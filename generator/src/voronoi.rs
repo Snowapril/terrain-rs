@@ -1,5 +1,6 @@
 use crate::{Edge, Intersection, Triangle};
 use cgmath::Point2;
+use crate::utils::gen_rand_point;
 #[allow(dead_code)]
 pub struct Voronoi {
     triangles: Vec<Triangle>,
