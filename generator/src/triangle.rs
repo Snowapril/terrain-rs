@@ -1,5 +1,18 @@
 use crate::vertex::{cross, signed_area, squared_length, Vertex};
 
+/// Triangle edge
+#[derive(PartialEq, Eq)]
+pub struct Edge {
+    pub v1: Vertex,
+    pub v2: Vertex,
+}
+
+impl Edge {
+    pub fn new(v1: Vertex, v2: Vertex) -> Self {
+        Self { v1, v2 }
+    }
+}
+
 /// triangle mesh topology constructed by three points
 pub struct Triangle(pub Vertex, pub Vertex, pub Vertex);
 
