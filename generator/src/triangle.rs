@@ -14,6 +14,7 @@ impl Edge {
 }
 
 /// triangle mesh topology constructed by three points
+#[derive(Clone, PartialEq, Eq)]
 pub struct Triangle(pub Vertex, pub Vertex, pub Vertex);
 
 #[derive(PartialEq, Eq)]
