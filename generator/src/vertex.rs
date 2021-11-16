@@ -1,5 +1,5 @@
-use rand::{thread_rng, Rng};
 use crate::common::Point2;
+use rand::{thread_rng, Rng};
 
 pub type Vertex = Point2<i32>;
 
