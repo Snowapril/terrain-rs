@@ -24,4 +24,13 @@ impl Voronoi {
 
         Self { triangles }
     }
+
+    pub fn random_voronoi(min_corner: Vertex, max_corner: Vertex, num_points: usize) -> Self {
+        let mut points: Vec<Vertex> = Vec::with_capacity(num_points);
+        for _ in 0..num_points {
+            points.push(gen_rand_vertex(min_corner, max_corner));
+        }
+
+        Self::new(points)
+    }
 }
