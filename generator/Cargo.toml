@@ -13,3 +13,4 @@ include = ["src/**/*.rs", "Cargo.toml"]
 [dependencies]
 rand = "0.8.4"
 log = "0.4.14"
+cgmath = "0.18"

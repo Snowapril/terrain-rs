@@ -1,5 +1,5 @@
-use crate::{Intersection, Triangle, Vertex};
-
+use crate::{Edge, Intersection, Triangle};
+use cgmath::Point2;
 #[allow(dead_code)]
 pub struct Voronoi {
     triangles: Vec<Triangle>,
@@ -8,7 +8,7 @@ pub struct Voronoi {
 impl Voronoi {
     /// Generate voronoi diagram using BowyerWatson algorithm
     /// refernced by https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm
-    pub fn new(points: Vec<Vertex>) -> Self {
+    pub fn new(points: Vec<Point2<i32>>) -> Self {
         let mut triangles: Vec<Triangle> = Vec::with_capacity(points.len() / 3);
         triangles.push(Triangle::super_triangle(&points));
         for point in points {
@@ -25,10 +25,14 @@ impl Voronoi {
         Self { triangles }
     }
 
-    pub fn random_voronoi(min_corner: Vertex, max_corner: Vertex, num_points: usize) -> Self {
-        let mut points: Vec<Vertex> = Vec::with_capacity(num_points);
+    pub fn random_voronoi(
+        min_corner: Point2<i32>,
+        max_corner: Point2<i32>,
+        num_points: usize,
+    ) -> Self {
+        let mut points: Vec<Point2<i32>> = Vec::with_capacity(num_points);
         for _ in 0..num_points {
-            points.push(gen_rand_vertex(min_corner, max_corner));
+            points.push(gen_rand_point(min_corner, max_corner));
         }
 
         Self::new(points)

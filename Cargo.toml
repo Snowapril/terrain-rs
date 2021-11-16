@@ -25,6 +25,7 @@ pollster = "0.2.4"
 async-executor = "1.4.1"
 bytemuck = "1.7.2"
 log = "0.4.14"
+cgmath = "0.18"
 terrain-generator = { path = "generator", version = "0.0.0"}
 
 [[bin]]
