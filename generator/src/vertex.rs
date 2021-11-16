@@ -1,5 +1,5 @@
 use rand::{thread_rng, Rng};
-use terrain_common::point::Point2;
+use crate::common::Point2;
 
 pub type Vertex = Point2<i32>;
 

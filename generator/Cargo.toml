@@ -11,5 +11,5 @@ include = ["src/**/*.rs", "Cargo.toml"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-terrain-common = { path = "../common", version = "0.0.0"}
 rand = "0.8.4"
+log = "0.4.14"

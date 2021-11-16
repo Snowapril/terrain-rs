@@ -13,7 +13,7 @@ include = ["LICENSE", "Cargo.toml", "src/**/*.rs"]
 [workspace]
 resolver = "2"
 members = [
-    ".", "common", "generator"
+    ".", "generator"
 ]
 
 [features]
@@ -26,7 +26,6 @@ async-executor = "1.4.1"
 bytemuck = "1.7.2"
 log = "0.4.14"
 terrain-generator = { path = "generator", version = "0.0.0"}
-terrain-common = { path = "common", version = "0.0.0"}
 
 [[bin]]
 name = "terrain-rs"
