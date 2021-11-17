@@ -1,6 +1,6 @@
+use crate::utils::gen_rand_point;
 use crate::{Edge, Intersection, Triangle};
 use cgmath::Point2;
-use crate::utils::gen_rand_point;
 #[allow(dead_code)]
 pub struct Voronoi {
     triangles: Vec<Triangle>,
@@ -10,18 +10,38 @@ impl Voronoi {
     /// Generate voronoi diagram using BowyerWatson algorithm
     /// refernced by https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm
     pub fn new(points: Vec<Point2<i32>>) -> Self {
+        log::debug!("Create voronoi diagram with #{} vertices", points.len());
         let mut triangles: Vec<Triangle> = Vec::with_capacity(points.len() / 3);
-        triangles.push(Triangle::super_triangle(&points));
+        let super_triangle = Triangle::super_triangle(&points);
+        triangles.push(super_triangle.clone());
         for point in points {
-            let mut _bad_triangles: Vec<Triangle> = Vec::new(); // TODO: need to use set?
-            for triangle in &triangles {
+            let mut bad_triangles: Vec<Triangle> = Vec::new(); // TODO: need to use set?
+            let mut edges: Vec<Edge> = Vec::new();
+            for triangle in triangles.iter() {
                 if triangle.check_circum_circle(&point) == Intersection::Inner {
-                    // bad_triangles.push(triangle.to_owned());
+                    edges.push(Edge::new(triangle.0, triangle.1));
+                    edges.push(Edge::new(triangle.1, triangle.2));
+                    edges.push(Edge::new(triangle.2, triangle.0));
+                    bad_triangles.push(triangle.clone());
                 }
             }
-            let mut _polygon: Vec<Triangle> = Vec::new();
-            todo!("implement rest algorithms")
+            // Remove duplication in edges
+            edges.dedup();
+            // Add triangulation
+            for edge in edges {
+                triangles.push(Triangle::new(edge.v1, edge.v2, point));
+            }
+            // Remove bad triangles from original triangles
+            // TODO: Remove bad triangles from triangles
         }
+
+        // Remove original super triangle
+        triangles.remove(
+            triangles
+                .iter()
+                .position(|triangle| triangle.eq(&super_triangle))
+                .unwrap(),
+        );
 
         Self { triangles }
     }

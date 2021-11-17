@@ -28,10 +28,10 @@ pub enum Intersection {
 impl Triangle {
     /// Return new triangle with given vertices
     pub fn new(v1: Point2<i32>, v2: Point2<i32>, v3: Point2<i32>) -> Self {
-        assert!(
-            signed_area(&v1, &v2, &v3) < 0,
-            "given vertices must construct triangle and ccw order"
-        );
+        // assert!(
+        //     signed_area(&v1, &v2, &v3) < 0,
+        //     "given vertices must construct triangle and ccw order"
+        // );
         Self(v1, v2, v3)
     }
 
@@ -42,9 +42,9 @@ impl Triangle {
         let v2 = self.1 - *point;
         let v3 = self.2 - *point;
 
-        let threshold = squared_length(&v1) * cross(&v2, &v3)
+        let threshold: isize = (squared_length(&v1) * cross(&v2, &v3)
             - squared_length(&v2) * cross(&v1, &v3)
-            + squared_length(&v3) * cross(&v1, &v2);
+            + squared_length(&v3) * cross(&v1, &v2)) as isize;
 
         match threshold {
             val if val > 0 => Intersection::Inner,
@@ -53,9 +53,30 @@ impl Triangle {
         }
     }
 
-    pub fn super_triangle(_points: &[Point2<i32>]) -> Self {
+    pub fn super_triangle(points: &[Point2<i32>]) -> Self {
         // TODO: make more correct super triangle
-        todo!("create super triangle including all given points");
+        let min_corner = points
+            .iter()
+            .fold(point2(i32::MAX, i32::MAX), |min_corner, vertex| {
+                point2(
+                    i32::min(min_corner.x, vertex.x),
+                    i32::min(min_corner.y, vertex.y),
+                )
+            });
+        let max_corner = points
+            .iter()
+            .fold(point2(i32::MIN, i32::MIN), |max_corner, vertex| {
+                point2(
+                    i32::max(max_corner.x, vertex.x),
+                    i32::max(max_corner.y, vertex.y),
+                )
+            });
+        let scale = max_corner - min_corner;
+        Self(
+            point2(min_corner.x - scale.x, min_corner.y - scale.y),
+            point2(min_corner.x - scale.x, max_corner.y + scale.y),
+            point2(max_corner.x + scale.x, scale.y / 2),
+        )
     }
 }
 

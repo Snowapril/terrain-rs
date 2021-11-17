@@ -3,6 +3,9 @@ use winit::{
     event_loop::{ControlFlow, EventLoop},
     window::WindowBuilder,
 };
+use terrain_generator::Voronoi;
+use cgmath::{point2, Point2};
+
 fn init_logger() {
     cfg_if::cfg_if! {
         if #[cfg(target_arch = "wasm32")] {
@@ -14,7 +17,10 @@ fn init_logger() {
 }
 
 fn main() {
+    let voronoi = Voronoi::random_voronoi(point2(0, 0), point2(960, 640), 1000);
+
     init_logger();
+    
     let event_loop = EventLoop::new();
     let window = WindowBuilder::new().build(&event_loop).unwrap();
 
